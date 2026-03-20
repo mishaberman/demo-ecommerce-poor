@@ -31,7 +31,7 @@ declare global {
   }
 }
 
-const PIXEL_ID = '123456789012345';
+const PIXEL_ID = '1684145446350033';
 
 // ============================================================
 // PIXEL EVENTS (Browser-side)

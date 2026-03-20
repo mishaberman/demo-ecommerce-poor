@@ -1,7 +1,8 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, Router } from "wouter";
+import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { CartProvider } from "./contexts/CartContext";
@@ -15,7 +16,7 @@ import Navbar from "./components/Navbar";
 import CartDrawer from "./components/CartDrawer";
 import Footer from "./components/Footer";
 
-function Router() {
+function AppRoutes() {
   return (
     <Switch>
       <Route path="/" component={Home} />
@@ -36,15 +37,17 @@ function App() {
       <ThemeProvider defaultTheme="light">
         <CartProvider>
           <TooltipProvider>
-            <Toaster />
-            <CartDrawer />
-            <div className="flex flex-col min-h-screen">
-              <Navbar />
-              <main className="flex-1">
-                <Router />
-              </main>
-              <Footer />
-            </div>
+            <Router hook={useHashLocation}>
+              <Toaster />
+              <CartDrawer />
+              <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <main className="flex-1">
+                  <AppRoutes />
+                </main>
+                <Footer />
+              </div>
+            </Router>
           </TooltipProvider>
         </CartProvider>
       </ThemeProvider>
